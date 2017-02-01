@@ -16,6 +16,12 @@ namespace Acme.Biz
         #region Constructors
         public Product()
         {
+            var colorOptions = new[] {"Red", "Expresso", "White", "Navy"};
+
+            foreach (var colorOption in colorOptions)
+                Console.WriteLine($"The color is {colorOption}");
+
+
         }
         public Product(int productId,
                         string productName,
@@ -84,8 +90,17 @@ namespace Acme.Biz
         /// </summary>
         /// <param name="markupPercent">Percent used to mark up the cost.</param>
         /// <returns></returns>
-        public decimal CalculateSuggestedPrice(decimal markupPercent) =>
-             this.Cost + (this.Cost * markupPercent / 100);
+        public OperationResult<decimal> CalculateSuggestedPrice(decimal markupPercent)
+        {
+            //this.Cost + (this.Cost * markupPercent / 100);
+            var message = "Some msg";
+
+            var value = Cost + (Cost * markupPercent / 100);
+
+            var operationResult = new OperationResult<decimal>(value, message);
+
+            return operationResult;
+        }
 
         public override string ToString()
         {
